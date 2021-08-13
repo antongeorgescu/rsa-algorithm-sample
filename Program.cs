@@ -18,17 +18,17 @@ namespace RSAAlgorithm2
 
             // generate key pair and store in 2 different files
             Console.WriteLine("Generate key pair and store in 2 different files.");
-            RSAKeyManagement.GenerateRsaKeyPair("privateKey.txt", "publicKey.txt");
+            RSAKeyManagement.GenerateRsaKeyPair("privateKey.txt", "publicKey.pem");
 
             // load public key from its file and apply encryption
             Console.WriteLine("Load public key from its file and apply encryption.");
-            RSA = RSAKeyManagement.PublicKeyFromPemFile("publicKey.txt");
+            RSA = RSAKeyManagement.PublicKeyFromPemFile("publicKey.pem");
             byte[] plaintext = ByteConverter.GetBytes(textToEncrypt);
             byte[] encryptedtext = RSAKeyManagement.Encryption(plaintext, RSA.ExportParameters(false), false);
 
             // load private key from its file and apply decryption
             Console.WriteLine("Load private key from its file and apply decryption.");
-            RSA = RSAKeyManagement.PrivateKeyFromPemFile("privateKey.txt");
+            RSA = RSAKeyManagement.PrivateKeyFromPemFile("privateKey.pem");
             byte[] decryptedtex = RSAKeyManagement.Decryption(encryptedtext,
             RSA.ExportParameters(true), false);
             var decryptedText = ByteConverter.GetString(decryptedtex);
